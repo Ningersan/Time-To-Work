@@ -1,0 +1,44 @@
+@import "./mixins.scss";
+
+.sider-bar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    top: 58px;
+    bottom: 0;
+    background-color: #fff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    ul {
+        height: 100%;
+        li {
+            font-size: 14px;
+            a {
+                display: block;
+                padding: 18px;
+                height: 58px;
+                color: rgb(68, 68, 68);
+                text-decoration: none;
+                @include prefix(transition, background-color .2s ease-out);
+                &:hover {
+                    background-color: rgba(0,0,0,0.1);
+                }
+                i {
+                    margin-right: 10px;
+                    color: #444444;
+                }
+            }
+        }
+    }
+}
+
+.slide-fade-enter-active {
+    @include prefix(transition, all .2s ease-out);
+}
+
+.slide-fade-leave-active {
+    @include prefix(transition, all .2s ease-out);    
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+    @include prefix(transform, translateX(-250px));    
+}
