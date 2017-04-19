@@ -1,20 +1,4 @@
-@mixin flex-display {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-@mixin top-button($float) {
-    float: $float;
-    padding: 0;    
-    width: 58px;
-    height: 58px;
-    border: none;
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    background-color: transparent;
-}
+@import "./mixins.scss";
 
 .app-bar-wrapper {
     width: 100%;
