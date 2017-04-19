@@ -6,8 +6,8 @@
                 <li><a href="#/all"><i class="fa fa-calendar-o fa-lg"></i>全部事项</a></li>
                 <li><a href="#/done"><i class="fa fa-calendar-check-o fa-lg"></i>完成事项</a></li>
                 <li><a href="#/doing"><i class="fa fa-calendar-times-o fa-lg"></i>在忙事项</a></li>
-                <li><a href="#/backup"><i class="fa fa-cloud-upload fa-lg"></i>云备份</a></li>
-                <li><a href="#/about"><i class="fa fa-info fa-lg"></i>关于</a></li>         
+                <li><a href="#/backup"><i class="fa fa-cloud-upload fa-lg" style="margin-left: -2px"></i>云备份</a></li>
+                <li><a href="#/about"><i class="fa fa-info fa-lg" style="margin-left: 5px; padding-right: 7px"></i>关于</a></li>         
             </ul>
         </nav>
     </transition>

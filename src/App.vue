@@ -2,10 +2,11 @@
 	<div class="contianer">
 		<app-bar></app-bar>
 		<nav-drawer></nav-drawer>
-		<div class="action-add" v-bind:class="{ 'active': isActive }" v-on:click="isActive = !isActive, sendMsg(isActive)">
+		<div class="action-add" :class="{ 'active': isActive }" v-on:click="isActive = !isActive, sendMsg(isActive)">
 			<i class="fa fa-plus fa-lg"></i>
 		</div>
 		<todo-core></todo-core>
+		<div class="tips"><span>点击红色按钮，开启新的一天</span></div>
 	</div>
 </template>
 
@@ -23,8 +24,9 @@
 			}
 		},
 		methods: {
-			sendMsg(show) {
-				bus.$emit("startUp", this.isActive)
+			sendMsg(show, back) {
+				bus.$emit("startUp", this.isActive);
+				bus.$emit("backToIndex", !this.isActive);
 			}
 		},
 		components: {
@@ -87,5 +89,17 @@
 	}
 	.active {
 		transform: rotate(-45deg);
+	}
+	.tips {
+		position: absolute;
+		bottom: 120px;
+		left: 50%;
+		width: 230px;
+		margin-left: -115px;
+		padding: 6px 15px;
+		text-align: center;
+		font-size: 14px;
+		color: #fff;
+		background-color: #42b983;
 	}
 </style>

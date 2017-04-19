@@ -1,5 +1,5 @@
 <template>
-    <transition name="slide-fade">
+    <transition name="fade">
         <section class="todoapp" v-show="show">
             <header class="header">
                 <h1>todos</h1>
