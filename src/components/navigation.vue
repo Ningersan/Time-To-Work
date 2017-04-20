@@ -1,4 +1,4 @@
-<<template>
+<template>
     <transition name="slide-fade">
         <nav v-show="ok" class="sider-bar">
             <ul>
@@ -13,7 +13,7 @@
     </transition>
 </template>
 
-<<script>
+<script>
     import bus from "../js/eventBus.js"
 
     export default {
