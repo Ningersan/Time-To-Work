@@ -29,10 +29,12 @@
         methods: {
             sendMsg (show) {
                 if (this.isBars) {
-                    bus.$emit("toggleNav", show)                
+                    bus.$emit("toggleNav", show)
                 } else {
+                    this.show = !this.show;
                     this.isBars = !this.isBars;
                     bus.$emit("startUp", !show);
+                    bus.$emit("btnBack", false);
                 }
             }
         }

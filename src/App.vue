@@ -23,6 +23,11 @@
                 isActive: false
             }
         },
+        mounted() {
+            bus.$on("btnBack", (msg) => {
+                this.isActive = msg;
+            })
+        },
         methods: {
             sendMsg(show, back) {
                 bus.$emit("startUp", this.isActive);
