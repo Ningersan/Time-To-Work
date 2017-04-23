@@ -6,13 +6,13 @@
             <i class="fa fa-plus fa-lg"></i>
         </div>
         <todo-core></todo-core>
+        <router-view></router-view>
         <div class="tips"><span>点击红色按钮，开启新的一天</span></div>
     </div>
 </template>
 
 <script>
     import bus from "./js/eventBus.js"
-
     import appBar from "./components/appBar.vue"
     import navDrawer from "./components/navigation.vue"
     import todoCore from "./components/todo.vue"
@@ -20,18 +20,19 @@
     export default {
         data() {
             return {
-                isActive: false
+                isActive: false,
             }
         },
         mounted() {
-            bus.$on("btnBack", (msg) => {
-                this.isActive = msg;
+            bus.$on("btnBack", () => {
+                this.isActive = false;
             })
         },
         methods: {
             sendMsg(show, back) {
                 bus.$emit("startUp", this.isActive);
                 bus.$emit("backToIndex", !this.isActive);
+                bus.$emit("closeNav");
             }
         },
         components: {
