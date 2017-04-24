@@ -1,12 +1,14 @@
 <template>
-    <div class="contianer">
+    <div class="container">
         <app-bar></app-bar>
         <nav-drawer></nav-drawer>
         <div class="action-add" :class="{ 'active': isActive }" v-on:click="isActive = !isActive, sendMsg(isActive)">
             <i class="fa fa-plus fa-lg"></i>
         </div>
         <todo-core></todo-core>
-        <router-view></router-view>
+        <transition>
+            <router-view></router-view>
+        </transition>
         <div class="tips"><span>点击红色按钮，开启新的一天</span></div>
     </div>
 </template>
@@ -28,11 +30,17 @@
                 this.isActive = false;
             })
         },
+        watch: {
+            '$route' (to, from) {
+                let visibility = this.$route.path.replace(/\/?/, '');
+                this.$store.commit('setVisibility', visibility);
+            }
+        },
         methods: {
             sendMsg(show, back) {
+                bus.$emit("closeNav");
                 bus.$emit("startUp", this.isActive);
                 bus.$emit("backToIndex", !this.isActive);
-                bus.$emit("closeNav");
             }
         },
         components: {
@@ -60,7 +68,7 @@
         font-family: "Source Code Pro", "Consolas", "Microsoft yahei", "Segoe UI", sans-serif;
     }
     #app,
-    .contianer {
+    .container {
         height: 100%;
     }
     .app-bar {
@@ -108,4 +116,5 @@
         color: #fff;
         background-color: #42b983;
     }
+
 </style>
