@@ -2,11 +2,11 @@
     <div class="container">
         <app-bar></app-bar>
         <nav-drawer></nav-drawer>
-        <div class="action-add" :class="{ 'active': isActive }" v-on:click="isActive = !isActive, sendMsg(isActive)">
+        <div class="action-add" :class="{ 'active': isActive }" v-on:click="redirToHome(), isActive = !isActive, sendMsg(isActive)">
             <i class="fa fa-plus fa-lg"></i>
         </div>
         <todo-core></todo-core>
-        <transition>
+        <transition name="slide-fade">
             <router-view></router-view>
         </transition>
         <div class="tips"><span>点击红色按钮，开启新的一天</span></div>
@@ -31,7 +31,7 @@
             })
         },
         watch: {
-            '$route' (to, from) {
+            '$route'(to, from) {
                 let visibility = this.$route.path.replace(/\/?/, '');
                 this.$store.commit('setVisibility', visibility);
             }
@@ -41,6 +41,9 @@
                 bus.$emit("closeNav");
                 bus.$emit("startUp", this.isActive);
                 bus.$emit("backToIndex", !this.isActive);
+            },
+            redirToHome() {
+                this.$router.push("/");
             }
         },
         components: {
@@ -116,5 +119,4 @@
         color: #fff;
         background-color: #42b983;
     }
-
 </style>

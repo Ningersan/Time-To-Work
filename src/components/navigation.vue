@@ -1,7 +1,7 @@
 <template>
     <transition name="slide-fade">
         <nav v-show="ok" class="sider-bar">
-            <ul>
+            <ul @click="closeNav">
                 <li><router-link to="/login"><i class="fa fa-sign-in fa-lg"></i>登录</router-link></router-link>
                 <li><router-link to="/all"><i class="fa fa-calendar-o fa-lg"></i>全部事项</router-link></li>
                 <li><router-link to="/completed"><i class="fa fa-calendar-check-o fa-lg"></i>完成事项</router-link></li>
@@ -29,6 +29,11 @@
             bus.$on("closeNav", msg => {
                 this.ok = false;
             })
+        },
+        methods: {
+            closeNav() {
+                this.ok = false;
+            }
         }
     }
 </script>

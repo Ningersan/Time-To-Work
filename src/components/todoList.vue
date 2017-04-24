@@ -1,23 +1,31 @@
 <template>
     <section class="main" v-show="todos.length" v-cloak>
         <ul class="todo-list">
-            <li v-for="todo in filteredTodos"
-                class="todo"
-                :key="todo.id"
-                :class="{ completed: todo.completed, editing: todo == editedTodo }">
-                <div class="view">
-                    <input class="toggle" type="checkbox" v-model="todo.completed">
-                    <label @click="editTodo(todo)">{{ todo.title }}</label>
-                    <button class="destroy" @click="removeTodo(todo)"></button>
-                </div>
-                <input class="edit" type="text"
-                v-model="todo.title"
-                v-todo-focus="todo == editedTodo"
-                @blur="doneEdit(todo)"
-                @keyup.enter="doneEdit(todo)"
-                @keyup.esc="cancelEdit(todo)"
+            <transition-group 
+                name="custom-classes-transition"
+                enter-class="list-enter"
+                enter-active-class="list-enter-active"
+                leave-active-class="animated bounceOutRight"
+            >
+                <li v-for="todo in filteredTodos"
+                    class="todo"
+                    :key="todo.id"
+                    :class="{ completed: todo.completed, editing: todo == editedTodo }"
                 >
-            </li>
+                    <div class="view">
+                        <input class="toggle" type="checkbox" v-model="todo.completed">
+                        <label @click="editTodo(todo)">{{ todo.title }}</label>
+                        <button class="destroy" @click="removeTodo(todo)"></button>
+                    </div>
+                    <input class="edit" type="text"
+                        v-model="todo.title"
+                        v-todo-focus="todo == editedTodo"
+                        @blur="doneEdit(todo)"
+                        @keyup.enter="doneEdit(todo)"
+                        @keyup.esc="cancelEdit(todo)"
+                    >
+                </li>
+            </transition-group>
         </ul>
     </section>
 </template>
@@ -74,6 +82,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style lang="scss">
@@ -126,6 +135,15 @@ export default {
                 bottom: -5px;
             }
         }
+    }
+
+    .list-enter {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    .list-enter-active {
+        transition: all .5s;
     }
 
 </style>
