@@ -4,11 +4,13 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from "../vuex/store.js";
 import App from '../App.vue';
+import user from '../components/user.vue';
 import todoList from '../components/todoList.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
+    { path: '/login', component: user },
     { path: '/all', component: todoList },
     { path: '/completed', component: todoList },
     { path: '/active', component: todoList }
