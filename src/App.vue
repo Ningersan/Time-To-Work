@@ -7,7 +7,9 @@
         </div>
         <todo-core></todo-core>
         <transition name="slide-fade">
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </transition>
         <div class="tips"><span>点击红色按钮，开启新的一天</span></div>
     </div>
@@ -32,8 +34,12 @@
         },
         watch: {
             '$route'(to, from) {
-                let visibility = this.$route.path.replace(/\/?/, '');
-                this.$store.commit('setVisibility', visibility);
+                let action = this.$route.path.replace(/\/?/, "");
+                if (action === "all" || action === "active" || action === "completed") {
+                    this.$store.commit("setVisibility", action);
+                } else {
+                    bus.$emit("showAction", action);
+                }
             }
         },
         methods: {
@@ -69,12 +75,15 @@
         overflow: hidden;
         font-weight: 300;
         font-family: "Source Code Pro", "Consolas", "Microsoft yahei", "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
     }
     #app,
     .container {
         height: 100%;
     }
     .app-bar {
+        z-index: 999;
         position: fixed;
         top: 0;
         left: 0;

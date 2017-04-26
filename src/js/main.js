@@ -11,6 +11,8 @@ Vue.use(VueRouter);
 
 const routes = [
     { path: '/login', component: user },
+    { path: '/cloud', component: user },
+    { path: '/about', component: user },
     { path: '/all', component: todoList },
     { path: '/completed', component: todoList },
     { path: '/active', component: todoList }
