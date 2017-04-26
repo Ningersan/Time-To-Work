@@ -10,12 +10,8 @@ import todoList from '../components/todoList.vue';
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/login', component: user },
-    { path: '/cloud', component: user },
-    { path: '/about', component: user },
-    { path: '/all', component: todoList },
-    { path: '/completed', component: todoList },
-    { path: '/active', component: todoList }
+    { path: '/user/:id', name:"user", components: { user }},
+    { path: '/todoList/:id', name:"todoList", components: { todoList }}
 ];
 
 const router = new VueRouter({

@@ -292,7 +292,7 @@ html .clear-completed:active {
 
 .fade-enter-active,
 .fade-leave-active {
-    @include prefix(transition, opacity .2s);
+    @include prefix(transition, opacity .3s);
 }
 
 .fade-enter,
