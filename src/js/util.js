@@ -30,6 +30,10 @@ export var filters = {
     }
 };
 
+export function $(ele) {
+    return document.querySelector(ele);
+}
+
 //事件绑定函数，兼容浏览器差异
 export function addEvent(element, event, listener) {
     if (element.addEventListener) {

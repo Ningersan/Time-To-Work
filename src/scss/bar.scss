@@ -15,7 +15,7 @@
         color: #fefefe;
     }
     .more {
-        @include top-button(right);        
+        @include top-button(right);
         margin-right: 1em;
     }
 }
