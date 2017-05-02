@@ -9,7 +9,7 @@
             </div>
             <p>{{ tips }}</p>
             <input action="text" placeholder="username" contenteditable="false">
-            <input action="password" placeholder="password">
+            <input type="password" placeholder="password">
             <div class="btn-sheet">
                 <button class="btn-login">登录</button>
             </div>
@@ -66,84 +66,3 @@
     }
 
 </script>
-
-<style lang="scss">
-    @import "../scss/mixins.scss";
-
-    .tw-mask {
-        @include absolute-center;
-        z-index: 5;
-        background: rgba(0,0,0,0.74);
-        .login-box-header {
-            width: 100%;
-            height: 14%;
-            cursor: move;
-        }
-        .tw-panel {
-            @extend .tw-mask;
-            width: 290px;
-            height: 330px;
-            text-algin: center;
-            font-family: "Hiragino Sans GB", "Helvetica";
-            background: #fff;
-            border-radius: 2px;
-            box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
-        }
-        .btn-sheet {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-        .cancel {
-            position: absolute;
-            top: 0;
-            right: 0;
-            a {
-                color: #cc9a9a;
-                padding: 3px 8px;
-                font-size: 20px;
-                font-weight: 500;
-                text-decoration: none;
-                &:hover {
-                    color: #af5b5e;
-                }
-            }
-        }
-        p {
-            width: 100%;
-            padding: 3% 15% 10%;
-            text-align: center;
-            line-height: 1.5;
-            color: #42b983;
-            font-weight: 500;
-        }
-        input {
-            display: block;
-            margin: 0 auto;
-            padding-top: 20px;
-            padding-left: 10px;
-            width: 77%;
-            border: 0;
-            border-bottom: 1px solid #BFBFC0;
-            outline: none;
-            font-size: 15px;
-            &:focus {
-                border-bottom-color: #42b983;
-            }
-        }
-        button {
-            display: block;
-            padding: 20px 40px;
-            width: 100%;
-            border: 0;
-            outline: 0;
-            color: #36bc7f;
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: 4px;
-            cursor: pointer;
-            background: none;
-        }
-    }
-
-</style>
