@@ -20,7 +20,7 @@
                     <li><a id="active" :class="{ selected: visibility == 'active' }">Active</a></li>
                     <li><a id="completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>
                 </ul>
-                <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">Clear completed</button>
+                <button class="clear-completed" @click="removeCompleted" v-show="todos.length">Clear completed</button>
             </footer>
         </section>
     </transition>
