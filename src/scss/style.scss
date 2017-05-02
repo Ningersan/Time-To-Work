@@ -1,0 +1,215 @@
+@import "./scss/mixins.scss";
+
+$color-theme: #42b983;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #F0F0F0;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: "Source Code Pro", "Consolas", "Microsoft yahei", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#app,
+.container {
+    height: 100%;
+}
+
+/* loading */
+#loading{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:white;
+    opacity: 1;
+    z-index: 999;
+    transition: transform 1s ease, opacity 1s ease;
+    transform : scale3d(1, 1, 1);
+    .content{
+        @include absolute-center;
+        width: 70px;
+        height:70px;
+        p{
+            text-align:center;
+            font-weight: 500;
+            color: #42b983;
+            text-indent: -8px;
+        }
+    }
+    img{
+        width: 77px;
+        height: 77px;
+    }
+
+    // http://tobiasahlin.com/spinkit/
+    .spinner {
+        width: 70px;
+        height: 70px;
+        position: relative;
+        margin: 0 auto 16px auto;
+    }
+
+    .double-bounce1, .double-bounce2 {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: $color-theme;
+        opacity: 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        -webkit-animation: bounce 2.0s infinite ease-in-out;
+        animation: bounce 2.0s infinite ease-in-out;
+    }
+
+    .double-bounce2 {
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+    }
+
+    @-webkit-keyframes bounce {
+        0%, 100% { -webkit-transform: scale(0.0) }
+        50% { -webkit-transform: scale(1.0) }
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: scale(0.0);
+            -webkit-transform: scale(0.0);
+        } 50% {
+            transform: scale(1.0);
+            -webkit-transform: scale(1.0);
+        }
+    }
+}
+
+/* User */
+.tw-mask {
+    @include absolute-center;
+    z-index: 5;
+    background: rgba(0,0,0,0.74);
+    .login-box-header {
+        width: 100%;
+        height: 14%;
+        cursor: move;
+    }
+    .tw-panel {
+        @extend .tw-mask;
+        width: 18.125rem;
+        height: 20.625rem;
+        text-align: center;
+        font-family: "Hiragino Sans GB", "Helvetica", "Microsoft YaHei", serif;
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
+    }
+    .btn-sheet {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .cancel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        a {
+            color: #cc9a9a;
+            padding: .4em;
+            font-size: 1.25rem;
+            font-weight: 500;
+            text-decoration: none;
+            &:hover {
+                color: #af5b5e;
+            }
+        }
+    }
+    p {
+        width: 100%;
+        padding: 3% 15% 10%;
+        text-align: center;
+        line-height: 1.5;
+        color: #42b983;
+        font-weight: 500;
+    }
+    input {
+        display: block;
+        margin: 0 auto;
+        padding-top: 1.33em;
+        padding-left: .67em;
+        width: 77%;
+        border: 0;
+        border-bottom: 1px solid #BFBFC0;
+        outline: none;
+        font-size: .93em;
+        &:focus {
+            border-bottom-color: #42b983;
+        }
+    }
+    button {
+        display: block;
+        padding: 1em 2em;
+        width: 100%;
+        border: 0;
+        outline: 0;
+        color: #36bc7f;
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: 4px;
+        cursor: pointer;
+        background: none;
+    }
+}
+
+/* Button add */
+.btn-add {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 3.625em;
+    height: 3.625em;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+    text-align: center;
+    transition: all .25s ease-out;
+    background-color: #FF5B45;
+    &:hover {
+        box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
+    }
+    i {
+        line-height: 2.85em;
+        color: #fff;
+    }
+}
+.active {
+    transform: rotate(-45deg);
+}
+
+/* Tips */
+.tips {
+    position: absolute;
+    bottom: 8.57em;
+    left: 50%;
+    width: 16.42em;
+    margin-left: -115px;
+    padding: .45em 1em;
+    z-index: 1;
+    text-align: center;
+    font-size: .875rem;
+    color: #fff;
+    background-color: $color-theme;
+}

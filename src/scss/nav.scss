@@ -2,9 +2,9 @@
 
 .sider-bar {
     position: fixed;
-    width: 250px;
+    width: 15.625rem;
     height: 100%;
-    top: 58px;
+    top: 3.625rem;
     bottom: 0;
     z-index: 555;
     background-color: #fff;
@@ -12,11 +12,11 @@
     ul {
         height: 100%;
         li {
-            font-size: 14px;
+            font-size: .875rem;
             a {
                 display: block;
-                padding: 18px;
-                height: 58px;
+                padding: 1.28em;
+                height: 4.14em;
                 color: rgb(68, 68, 68);
                 text-decoration: none;
                 @include prefix(transition, background-color .2s ease-out);
@@ -24,7 +24,7 @@
                     background-color: rgba(0,0,0,0.1);
                 }
                 i {
-                    margin-right: 10px;
+                    margin-right: .72em;
                     color: #444444;
                 }
             }
@@ -32,10 +32,12 @@
     }
 }
 
-.slide-fade-enter-active, .slide-fade-leave-active {
+.slide-fade-enter-active,
+.slide-fade-leave-active {
     @include prefix(transition, all .2s ease-out);
 }
 
-.slide-fade-enter, .slide-fade-leave-to {
+.slide-fade-enter,
+.slide-fade-leave-to {
     @include prefix(transform, translateX(-250px));
 }
