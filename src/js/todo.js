@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 import bus from "./eventBus.js";
 import todoList from "../components/todoList.vue";
-import { todoStorage } from "./util.js";
+import { todoStorage, getTodayDate, getDay } from "./util.js";
 import {mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -9,6 +9,7 @@ export default {
         return {
             show: false,
             newTodo: '',
+            date: getTodayDate()
         };
     },
 
@@ -41,6 +42,10 @@ export default {
             'remaining'
         ]),
 
+        day() {
+            return getDay(this.date);
+        },
+
         allDone: {
             get() {
                 return this.remaining === 0;
@@ -57,11 +62,18 @@ export default {
     },
     methods: {
         addTodo() {
-            let value = this.newTodo && this.newTodo.trim();
-            if (!value) {
+            let date = this.date;
+            let title = this.newTodo && this.newTodo.trim();
+
+            if (!title) {
                 return;
             }
-            this.$store.commit('addTodo', value);
+
+            this.$store.commit('addTodo', {
+                title,
+                date
+            });
+            console.log(this.date)
             this.newTodo = '';
         },
 

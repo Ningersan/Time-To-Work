@@ -22,11 +22,12 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        addTodo(state, value) {
+        addTodo(state, payload) {
             state.todos.push({
                 id: todoStorage.uid++,
-                title: value,
-                completed: false
+                title: payload.title,
+                completed: false,
+                date: payload.date
             });
         },
 
