@@ -2,13 +2,14 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { filters, STORAGE_KEY, todoStorage } from "../js/util.js";
+import { filters, sortedDates, STORAGE_KEY, todoStorage, timelineStorage } from "../js/util.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         todos: todoStorage.fetch(),
+        timeline: {},
         visibility: 'all'
     },
 
@@ -16,23 +17,42 @@ export default new Vuex.Store({
         remaining(state) {
             return filters.active(state.todos).length;
         },
-        filteredTodos(state) {
-            return filters[state.visibility](state.todos);
-        }
+        getDates(state) {
+            return Object.keys(state.timeline);
+        },
+        filteredTodos: (state) => (todos) => filters[state.visibility](todos),
     },
 
     mutations: {
         addTodo(state, payload) {
-            state.todos.push({
+            // todos
+            let todo = {
                 id: todoStorage.uid++,
                 title: payload.title,
                 completed: false,
                 date: payload.date
-            });
+            };
+
+            state.todos.push(todo);
+
+            // timeline
+            if (!state.timeline[payload.date]) {
+                Vue.set(state.timeline, payload.date, {
+                    date: new Date(payload.date),
+                    todos: []
+                });
+            }
+
+            state.timeline[payload.date].todos.push(todo);
         },
 
         removeTodo(state, todo) {
-            state.todos.splice(state.todos.indexOf(todo), 1);
+            let date = todo.date;
+            let stateTodos = state.todos;
+            let timelineTodos = state.timeline[date].todos;
+
+            stateTodos.splice(stateTodos.indexOf(todo), 1);
+            timelineTodos.splice(timelineTodos.indexOf(todo), 1);
         },
 
         setAllDone(state, value) {

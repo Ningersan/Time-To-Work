@@ -1,13 +1,12 @@
 <template>
     <section class="main" v-show="todos.length" v-cloak>
         <ul class="todo-list">
-            <transition-group 
+            <transition-group
                 name="custom-classes-transition"
                 enter-class="list-enter"
                 enter-active-class="list-enter-active"
-                leave-active-class="animated bounceOutRight"
             >
-                <li v-for="todo in filteredTodos"
+                <li v-for="todo in filteredTodos(todos)"
                     class="todo"
                     :key="todo.id"
                     :class="{ completed: todo.completed, editing: todo == editedTodo }"
@@ -49,13 +48,12 @@ export default {
     computed: {
         ...mapState([
             'todos'
-        ]),
-
-        ...mapGetters([
-            'filteredTodos'
         ])
     },
     methods: {
+        filteredTodos(todos) {
+            return this.$store.getters.filteredTodos(todos);
+        },
         removeTodo(todo) {
             this.$store.commit('removeTodo', todo);
         },
@@ -86,10 +84,10 @@ export default {
 </script>
 
 <style lang="scss">
-    .container {
-        > .main {
+    .todo-display {
+        margin-top: -30px;
+        > .todo-view {
             margin: 90px 300px 40px 300px;
-            background: #fff;
             button {
                 border: 0;
                 background: none;
@@ -103,13 +101,54 @@ export default {
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
             }
+            em {
+                display: inline-block;
+                margin: 10px auto 5px 12px;
+                padding: 3px 8px;
+                min-width: initial;
+                color: #9e9e9e;
+                font-size: 14px;
+                font-style: inherit;
+                font-weight: bolder;
+                text-align: center;
+                border-radius: 2px;
+            }
             li {
                 height: 48px;
                 font-size: 16px;
                 font-weight: 400;
                 border: none;
+                background: #fff;
                 view {
                     height: inherit;
+                }
+            }
+            .tw-day {
+                position: relative;
+            }
+            .date-info {
+                span {
+                    display: inline-block;
+                    position: absolute;
+                    top: 16px;
+                    left: 50%;
+                    margin-left: -35px;
+                    text-align: center;
+                    color: #9e9e9e;
+                    font-size: 13px;
+                    font-family: "Hiragino Sans GB", "Helvetica", "Microsoft YaHei", serif;
+
+                }
+            }
+            .today {
+                em {
+                    margin-left: 20px;
+                    margin-right: 18px;
+                    color: #fff;
+                    background: #42b983;
+                }
+                > span {
+                    color: #42b983;
                 }
             }
             .toggle {

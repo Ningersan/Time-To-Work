@@ -2,6 +2,7 @@
 
 //localStorage persistence
 export const STORAGE_KEY = "todos-vuejs-2.0";
+export const STORAGE_TIMELINE = "todos-timeline";
 
 export var todoStorage = {
     fetch() {
@@ -14,6 +15,17 @@ export var todoStorage = {
     },
     save(todos) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+    }
+};
+
+export var timelineStorage = {
+    fetch() {
+        let timeline = JSON.parse(localStorage.getItem(STORAGE_TIMELINE) || '{}');
+        timelineStorage.uid = timeline.length;
+        return timeline;
+    },
+    save(timeline) {
+        localStorage.setItem(STORAGE_TIMELINE, JSON.stringify(timeline));
     }
 };
 
@@ -30,7 +42,7 @@ export var filters = {
     }
 };
 
-// date manage
+// date management
 export function getDateStr(date) {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -40,6 +52,7 @@ export function getDateStr(date) {
     month = month < 10 ? ("0" + month) : month;
     day = day < 10 ? ("0" + day) : day;
     dateStr = `${year}-${month}-${day}`;
+
     return dateStr;
 }
 
@@ -55,13 +68,14 @@ export function getDay(dateStr) {
     return dayMap[day];
 }
 
-//事件绑定函数，兼容浏览器差异
-export function addEvent(element, event, listener) {
-    if (element.addEventListener) {
-        element.addEventListener(event, listener, false);
-    } else if (element.attachEvent) {
-        element.attachEvent("on" + event, listener);
-    } else {
-        element["on" + event] = listener;
-    }
+export function dateComparisonFunc(a, b) {
+    let [dateA, dateB] = [new Date(a), new Date(b)];
+    return dateA - dateB;
+}
+
+// 计算两个日期相差天数
+export function getDateDiff(startDate, endDate) {
+    let [date1, date2, dateDiff] = [new Date(startDate), new Date(endDate), null];
+    dateDiff = (date2 - date1)/1000/60/60/24;
+    return dateDiff;
 }

@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 import bus from "./eventBus.js";
 import todoList from "../components/todoList.vue";
-import { todoStorage, getTodayDate, getDay } from "./util.js";
+import { todoStorage, timelineStorage, getTodayDate, getDay } from "./util.js";
 import {mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -29,12 +29,19 @@ export default {
                 todoStorage.save(todos);
             },
             deep: true
+        },
+        timeline: {
+            handler(timeline) {
+                timelineStorage.save(timeline);
+            },
+            deep: true
         }
     },
 
     computed: {
         ...mapState([
             'todos',
+            'timeline',
             'visibility'
         ]),
 
@@ -73,7 +80,7 @@ export default {
                 title,
                 date
             });
-            console.log(this.date)
+            
             this.newTodo = '';
         },
 
@@ -87,4 +94,3 @@ export default {
         }
     }
 };
-

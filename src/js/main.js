@@ -5,13 +5,14 @@ import VueRouter from 'vue-router';
 import store from "../vuex/store.js";
 import App from '../App.vue';
 import user from '../components/user.vue';
-import todoList from '../components/todoList.vue';
+import todoView from '../components/todoView.vue';
+import { timelineStorage } from '../js/util.js';
 
 Vue.use(VueRouter);
 
 const routes = [
     { path: '/user/:id', name:"user", components: { user }},
-    { path: '/todoList/:id', name:"todoList", components: { todoList }}
+    { path: '/todoList/:id', name:"todoList", components: { todoView }}
 ];
 
 const router = new VueRouter({
@@ -23,5 +24,9 @@ new Vue({
     store,
     router,
     components: { App }
+});
+
+store.watch((state) => state.timeline, () => {
+    console.log("hh");
 });
 

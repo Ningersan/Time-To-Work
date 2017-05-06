@@ -15,7 +15,7 @@
                 <span class="todo-count">
                 <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
                 </span>
-                <ul class="filters" @click="filterTodos">
+                <ul class="filters" @click="filterTodos(todos)">
                     <li><a id="all" :class="{ selected: visibility == 'all' }">All</a></li>
                     <li><a id="active" :class="{ selected: visibility == 'active' }">Active</a></li>
                     <li><a id="completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>

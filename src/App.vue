@@ -37,7 +37,7 @@
         <!--Todo List-->
         <transition name="slide-fade">
             <keep-alive>
-                <router-view name="todoList"></router-view>
+                <router-view name="todoView"></router-view>
             </keep-alive>
         </transition>
 
