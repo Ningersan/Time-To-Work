@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         todos: todoStorage.fetch(),
-        timeline: {},
+        timeline: timelineStorage.fetch(),
         visibility: 'all'
     },
 
@@ -53,6 +53,11 @@ export default new Vuex.Store({
 
             stateTodos.splice(stateTodos.indexOf(todo), 1);
             timelineTodos.splice(timelineTodos.indexOf(todo), 1);
+
+            // if todos is empty in date, delete date property.
+            if (!timelineTodos.length) {
+                delete state.timeline[date];
+            }
         },
 
         setAllDone(state, value) {

@@ -7,7 +7,7 @@
             >
                 <div class="date-info"
                     :class="{ today: date === getTodayDate }"
-                    v-show="filteredTodos(timeline[date].todos).length"
+                    v-show="filteredTodos(date).length"
                 >
                     <em>{{ getDayDiff(date) }}</em>
                     <span>{{ date }}</span>
@@ -17,9 +17,9 @@
                         name="custom-classes-transition"
                         leave-active-class="animated bounceOutRight"
                     >
-                        <li v-for="todo in filteredTodos(timeline[date].todos)"
-                        key="todo.id"
-                        :class="{ completed: todo.completed, editing: todo == editedTodo }"
+                        <li v-for="todo in filteredTodos(date)"
+                            key="todo.id"
+                            :class="{ completed: todo.completed, editing: todo == editedTodo }"
                         >
                             <div class="view">
                                 <input class="toggle" type="checkbox" v-model="todo.completed">
@@ -70,7 +70,9 @@
             }
         },
         methods: {
-            filteredTodos(todos) {
+            filteredTodos(date) {
+                let todos = this.timeline.hasOwnProperty(date) ? this.timeline[date].todos : {};
+                console.log(this.timeline.hasOwnProperty(date));
                 return this.$store.getters.filteredTodos(todos);
             },
 
