@@ -1,27 +1,17 @@
 /*jshint esversion: 6 */
 
 //localStorage persistence
-export const STORAGE_KEY = "todos-vuejs-2.0";
 export const STORAGE_TIMELINE = "todos-timeline";
-
-export var todoStorage = {
-    fetch() {
-        let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        todos.forEach((todo, index) => {
-            todo.id = index;
-        });
-        todoStorage.uid = todos.length;
-        return todos;
-    },
-    save(todos) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-    }
-};
 
 export var timelineStorage = {
     fetch() {
         let timeline = JSON.parse(localStorage.getItem(STORAGE_TIMELINE) || '{}');
-        timelineStorage.uid = timeline.length;
+        let todos = getAllTodos(timeline);
+
+        todos.forEach((todo, index) => {
+            todo.id = index;
+        });
+        timelineStorage.uid = todos.length;
         return timeline;
     },
     save(timeline) {
@@ -41,6 +31,15 @@ export var filters = {
         return todos.filter(todo => todo.completed);
     }
 };
+
+// get all todos from timeline
+export function getAllTodos(timeline) {
+    let todos = [];
+    for (let date in timeline) {
+        todos.push(...timeline[date].todos);
+    }
+    return todos;
+}
 
 // date management
 export function getDateStr(date) {

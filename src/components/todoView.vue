@@ -72,7 +72,6 @@
         methods: {
             filteredTodos(date) {
                 let todos = this.timeline.hasOwnProperty(date) ? this.timeline[date].todos : {};
-                console.log(this.timeline.hasOwnProperty(date));
                 return this.$store.getters.filteredTodos(todos);
             },
 

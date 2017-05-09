@@ -8,7 +8,7 @@
                 v-model="newTodo"
                 @keyup.enter="addTodo"
                 placeholder="What needs to be done?">
-                <input class="toggle-all" type="checkbox" v-show="todos.length" v-model="allDone">
+                <input class="toggle-all" type="checkbox" v-show="Object.keys(timeline).length" v-model="allDone">
             </header>
             <todo-list></todo-list>
             <footer class="footer" v-cloak>
@@ -35,4 +35,3 @@
 </style>
 
 <script src="../js/todo.js"></script>
-

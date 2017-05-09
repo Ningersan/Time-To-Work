@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 import bus from "./eventBus.js";
 import todoList from "../components/todoList.vue";
-import { todoStorage, timelineStorage, getTodayDate, getDay } from "./util.js";
+import { todoStorage, timelineStorage, filters, getTodayDate, getDay, getAllTodos } from "./util.js";
 import {mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -24,12 +24,6 @@ export default {
     },
 
     watch: {
-        todos: {
-            handler(todos) {
-                todoStorage.save(todos);
-            },
-            deep: true
-        },
         timeline: {
             handler(timeline) {
                 timelineStorage.save(timeline);
@@ -40,14 +34,17 @@ export default {
 
     computed: {
         ...mapState([
-            'todos',
             'timeline',
             'visibility'
         ]),
 
-        ...mapGetters([
-            'remaining'
-        ]),
+        todos() {
+            return getAllTodos(this.timeline);
+        },
+
+        remaining() {
+            return filters.active(this.todos).length;
+        },
 
         day() {
             return getDay(this.date);
@@ -58,7 +55,9 @@ export default {
                 return this.remaining === 0;
             },
             set(value) {
-                return this.$store.commit('setAllDone', value);
+                return this.todos.forEach(todo => {
+                    todo.completed = value;
+                });
             }
         }
     },
@@ -84,13 +83,13 @@ export default {
             this.newTodo = '';
         },
 
-        ...mapMutations([
-            'removeCompleted'
-        ]),
-
         filterTodos(event) {
             let id = event.target.id;
             this.$store.commit('setVisibility', id);
+        },
+
+        removeCompleted() {
+            this.todos = filters.active(this.todos);
         }
     }
 };

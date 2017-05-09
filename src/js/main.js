@@ -26,7 +26,4 @@ new Vue({
     components: { App }
 });
 
-store.watch((state) => state.timeline, () => {
-    console.log("hh");
-});
-
+// window.localStorage.clear();
