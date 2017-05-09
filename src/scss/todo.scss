@@ -238,7 +238,9 @@ label[for='toggle-all'] {
             outline: none;
             background: none;
             -webkit-appearance: none;
+            color: #777;
             font-size: 14px;
+            font-family: inherit;
             &:hover + .week {
                 display: none;
             }
@@ -346,7 +348,7 @@ html .clear-completed:active {
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 900px) {
     .footer {
         box-sizing: content-box;
         height: 50px;
