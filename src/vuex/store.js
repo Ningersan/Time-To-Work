@@ -52,6 +52,10 @@ export default new Vuex.Store({
             }
         },
 
+        setTimeline(state, value) {
+            state.timeline = value;
+        },
+
         setVisibility(state, value) {
             if (value) {
                 state.visibility = filters[value] ? value : 'all';
