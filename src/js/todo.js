@@ -89,7 +89,11 @@ export default {
         },
 
         removeCompleted() {
-            this.todos = filters.active(this.todos);
+            let todos = filters.completed(this.todos);
+            for (let i = 0, len = todos.length; i < len; i++) {
+                let todo = todos[i];
+                this.$store.commit('removeTodo', todo);
+            }
         }
     }
 };
