@@ -6,6 +6,12 @@ import { filters, sortedDates, getAllTodos, STORAGE_KEY, todoStorage, timelineSt
 
 Vue.use(Vuex);
 
+// cloud
+// https://leancloud.cn/
+const appId = '2jwWwi1FCWnxfA2YzUEQG3Ar-gzGzoHsz';
+const appKey = 'TFBwcxwUSCV9fyx3ys3QYusl';
+AV.init({ appId, appKey });
+
 export default new Vuex.Store({
     state: {
         timeline: timelineStorage.fetch(),

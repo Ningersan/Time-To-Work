@@ -27,8 +27,3 @@ new Vue({
 });
 
 // window.localStorage.clear();
-
-// https://leancloud.cn/
-const appId = '2jwWwi1FCWnxfA2YzUEQG3Ar-gzGzoHsz';
-const appKey = 'TFBwcxwUSCV9fyx3ys3QYusl';
-AV.init({ appId, appKey });
