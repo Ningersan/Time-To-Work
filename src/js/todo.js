@@ -1,8 +1,8 @@
 /*jshint esversion: 6 */
 import bus from "./eventBus.js";
 import todoList from "../components/todoList.vue";
-import { todoStorage, timelineStorage, filters, getTodayDate, getDay, getAllTodos } from "./util.js";
-import {mapState, mapGetters, mapMutations } from "vuex";
+import { timelineStorage, filters, getTodayDate, getDay, getAllTodos } from "./util.js";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
     data() {
@@ -79,7 +79,7 @@ export default {
                 title,
                 date
             });
-            
+
             this.newTodo = '';
         },
 
