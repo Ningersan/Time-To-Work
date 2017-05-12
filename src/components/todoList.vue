@@ -2,9 +2,7 @@
     <section class="main" v-show="todos.length" v-cloak>
         <ul class="todo-list">
             <transition-group
-                name="custom-classes-transition"
-                enter-class="list-enter"
-                enter-active-class="list-enter-active"
+                name="list"
             >
                 <li v-for="todo in filteredTodos(todos)"
                     class="todo"
@@ -39,21 +37,15 @@ export default {
             editedTodo: null,
         }
     },
+
+    props: ['todos'],
+
     directives: {
         'todo-focus'(el, value) {
             if (el, value) {
                 el.focus();
             }
         }
-    },
-    computed: {
-        ...mapState([
-            'timeline'
-        ]),
-
-        todos() {
-            return getAllTodos(this.timeline);
-        },
     },
     methods: {
         filteredTodos(todos) {

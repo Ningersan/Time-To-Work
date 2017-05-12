@@ -12,30 +12,10 @@
                     <em>{{ getDayDiff(date) }}</em>
                     <span>{{ date }}</span>
                 </div>
-                <ul class="todo-list">
-                    <transition-group
-                        name="custom-classes-transition"
-                        leave-active-class="animated bounceOutRight"
-                    >
-                        <li v-for="todo in filteredTodos(date)"
-                            key="todo.id"
-                            :class="{ completed: todo.completed, editing: todo == editedTodo }"
-                        >
-                            <div class="view">
-                                <input class="toggle" type="checkbox" v-model="todo.completed">
-                                <label @click="editTodo(todo)">{{ todo.title }}</label>
-                                <button class="destroy" @click="removeTodo(todo)"></button>
-                            </div>
-                            <input class="edit" type="text"
-                                v-model="todo.title"
-                                v-todo-focus="todo == editedTodo"
-                                @blur="doneEdit(todo)"
-                                @keyup.enter="doneEdit(todo)"
-                                @keyup.esc="cancelEdit(todo)"
-                            >
-                        </li>
-                    </transition-group>
-                </ul>
+
+                <!--component-->
+                <todo-list :todos="filteredTodos(date)"></todo-list>
+                <!--end-->
             </div>
         </div>
     </section>
@@ -43,6 +23,7 @@
 
 <script>
     import { mapState } from "vuex";
+    import todoList from "../components/todoList.vue";
     import { dateComparisonFunc, getDateDiff, getTodayDate } from "../js/util.js";
 
     export default {
@@ -57,6 +38,9 @@
                     el.focus();
                 }
             }
+        },
+        components: {
+            todoList
         },
         computed: {
             ...mapState(['timeline']),
@@ -89,31 +73,6 @@
                 }
 
                 return dayDiffStr;
-            },
-
-            removeTodo(todo) {
-                this.$store.commit('removeTodo', todo);
-            },
-
-            editTodo(todo) {
-                this.beforeEditCache = todo.title;
-                this.editedTodo = todo;
-            },
-
-            doneEdit(todo) {
-                if (!this.editedTodo) {
-                    return;
-                }
-                this.editedTodo = null;
-                todo.title = todo.title.trim();
-                if (!todo.title) {
-                    this.removeTodo(todo);
-                }
-            },
-
-            cancelEdit(todo) {
-                this.editedTodo = null;
-                todo.title = this.beforeEditCache;
             }
         }
     }

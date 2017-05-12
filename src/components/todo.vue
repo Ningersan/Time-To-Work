@@ -10,7 +10,11 @@
                 placeholder="What needs to be done?">
                 <input class="toggle-all" type="checkbox" v-show="Object.keys(timeline).length" v-model="allDone">
             </header>
-            <todo-list></todo-list>
+
+            <!--component-->
+            <todo-list :todos="todos"></todo-list>
+            <!--end-->
+
             <footer class="footer" v-cloak>
                 <span class="todo-count">
                 <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
