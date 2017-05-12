@@ -328,6 +328,15 @@ body {
     }
 }
 
+// animation
+.todo {
+    display: block;
+}
+
+.list-move {
+    transition: all 1s;
+}
+
 .list-enter {
     opacity: 0;
     transform: translateX(-30px);
@@ -335,4 +344,23 @@ body {
 
 .list-enter-active {
     transition: all .5s;
+}
+
+.list-leave-active {
+    position: absolute !important;
+    -webkit-animation: bounce-out-right 1s;
+    animation: bounce-out-right 1s;
+}
+
+// https://github.com/daneden/animate.css/blob/master/animate.css
+@keyframes bounce-out-right {
+    20% {
+        opacity: 1;
+        transform: translate3d(-20px, 0, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate3d(2000px, 0, 0);
+    }
 }
