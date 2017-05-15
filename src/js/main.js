@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import store from "../vuex/store.js";
+import store from '../vuex/store.js';
 import App from '../App.vue';
 import user from '../components/user.vue';
 import todoView from '../components/todoView.vue';

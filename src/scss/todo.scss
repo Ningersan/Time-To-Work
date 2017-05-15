@@ -94,6 +94,11 @@
     border-top: 1px solid #e6e6e6;
 }
 
+#wrapper {
+    max-height: 240px;
+    overflow: hidden;
+}
+
 label[for='toggle-all'] {
     display: none;
 }
@@ -199,6 +204,9 @@ label[for='toggle-all'] {
             }
             &:after {
                 content: 'x';
+            }
+            @media all and (max-width: 640px) {
+                display: inline-block;
             }
         }
         .edit {

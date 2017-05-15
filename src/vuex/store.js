@@ -15,12 +15,16 @@ AV.init({ appId, appKey });
 export default new Vuex.Store({
     state: {
         timeline: timelineStorage.fetch(),
-        visibility: 'all'
+        visibility: 'all',
+        todoScroll : null
     },
 
     getters: {
         getDates(state) {
             return Object.keys(state.timeline);
+        },
+        getTodoScroll(state) {
+            return state.todoScroll;
         },
         filteredTodos: (state) => (todos) => filters[state.visibility](todos),
     },
@@ -66,6 +70,10 @@ export default new Vuex.Store({
             if (value) {
                 state.visibility = filters[value] ? value : 'all';
             }
+        },
+
+        setScroll(state, value) {
+            state.todoScroll = value;
         }
     }
 });

@@ -29,9 +29,11 @@
     export default {
         data() {
             return {
-                editedTodo: null
+                editedTodo: null,
+                timelineScroll: null
             }
         },
+
         directives: {
             'todo-focus'(el, value) {
                 if (el, value) {
@@ -39,20 +41,49 @@
                 }
             }
         },
+
         components: {
             todoList
         },
+
+        beforeRouteEnter: (to, from, next) => {
+            next(vm => {
+                vm.timelineScroll.refresh();
+            });
+        },
+
+        mounted() {
+            // regist timeline scroll
+            let timelineScroll = new IScroll(".todo-display", {
+                mouseWheel: true,
+                bindToWrapper: true
+            });
+
+            this.timelineScroll = timelineScroll;
+        },
+
+        watch: {
+            filteredTodos: () => {
+                // refresh scroll
+                if (this.timelineScroll) {
+                    this.timelineScroll.refresh();
+                }
+            }
+        },
+
         computed: {
             ...mapState(['timeline']),
 
             getTodayDate() {
                 return getTodayDate();
             },
+
             sortedDates() {
                 let dates = this.$store.getters.getDates;
                 return dates.sort(dateComparisonFunc);
             }
         },
+
         methods: {
             filteredTodos(date) {
                 let todos = this.timeline.hasOwnProperty(date) ? this.timeline[date].todos : {};

@@ -5,6 +5,8 @@ $color-theme: #42b983;
 * {
     margin: 0;
     padding: 0;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -100,7 +102,7 @@ body {
 /* User */
 .tw-mask {
     @include absolute-center;
-    z-index: 5;
+    z-index: 11;
     background: rgba(0,0,0,0.74);
     .login-box {
         height: 100%;
@@ -187,6 +189,7 @@ body {
 /* Button add */
 .btn-add {
     position: fixed;
+    z-index: 10;
     right: 25px;
     bottom: 25px;
     width: 3.625em;
@@ -227,8 +230,15 @@ body {
 /* Todo List View */
 .todo-display {
     margin-top: 60px;
+    max-height: 480px;
+    overflow: hidden;
+    z-index: 9;
+    #wrapper {
+        max-height: inherit;
+    }
     > .todo-view {
         width: 100%;
+
         margin: auto;
         @media all and (min-width: 640px) {
             width: 70%;

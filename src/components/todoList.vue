@@ -1,29 +1,31 @@
 <template>
     <section class="main" v-show="todos.length" v-cloak>
-        <ul class="todo-list">
-            <transition-group
-                name="list"
-            >
-                <li v-for="todo in filteredTodos(todos)"
-                    class="todo"
-                    :key="todo.id"
-                    :class="{ completed: todo.completed, editing: todo == editedTodo }"
+        <div id="wrapper">
+            <ul class="todo-list">
+                <transition-group
+                    name="list"
                 >
-                    <div class="view">
-                        <input class="toggle" type="checkbox" v-model="todo.completed">
-                        <label @click="editTodo(todo)">{{ todo.title }}</label>
-                        <button class="destroy" @click="removeTodo(todo)"></button>
-                    </div>
-                    <input class="edit" type="text"
-                        v-model="todo.title"
-                        v-todo-focus="todo == editedTodo"
-                        @blur="doneEdit(todo)"
-                        @keyup.enter="doneEdit(todo)"
-                        @keyup.esc="cancelEdit(todo)"
+                    <li v-for="todo in filteredTodos(todos)"
+                        class="todo"
+                        :key="todo.id"
+                        :class="{ completed: todo.completed, editing: todo == editedTodo }"
                     >
-                </li>
-            </transition-group>
-        </ul>
+                        <div class="view">
+                            <input class="toggle" type="checkbox" v-model="todo.completed">
+                            <label @click="editTodo(todo)">{{ todo.title }}</label>
+                            <button class="destroy" @click="removeTodo(todo)"></button>
+                        </div>
+                        <input class="edit" type="text"
+                            v-model="todo.title"
+                            v-todo-focus="todo == editedTodo"
+                            @blur="doneEdit(todo)"
+                            @keyup.enter="doneEdit(todo)"
+                            @keyup.esc="cancelEdit(todo)"
+                        >
+                    </li>
+                </transition-group>
+            </ul>
+        </div>
     </section>
 </template>
 
@@ -47,6 +49,15 @@ export default {
             }
         }
     },
+
+    mounted() {
+        let todoScroll = new IScroll('#wrapper', {
+            mouseWheel: true,
+            bindToWrapper: true
+        });
+        this.$store.commit('setScroll', todoScroll);
+    },
+
     methods: {
         filteredTodos(todos) {
             return this.$store.getters.filteredTodos(todos);

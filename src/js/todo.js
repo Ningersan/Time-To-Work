@@ -20,6 +20,9 @@ export default {
     mounted() {
         bus.$on("startUp", msg => {
             this.show = msg;
+
+            // refresh scroll
+            this.refreshScroll();
         });
     },
 
@@ -27,6 +30,7 @@ export default {
         timeline: {
             handler(timeline) {
                 timelineStorage.save(timeline);
+                this.refreshScroll();
             },
             deep: true
         }
@@ -35,7 +39,8 @@ export default {
     computed: {
         ...mapState([
             'timeline',
-            'visibility'
+            'visibility',
+            'todoScroll'
         ]),
 
         todos() {
@@ -67,6 +72,14 @@ export default {
         }
     },
     methods: {
+        refreshScroll() {
+            if (this.todoScroll) {
+                this.$nextTick(() => {
+                    this.todoScroll.refresh();
+                })
+            }
+        },
+
         addTodo() {
             let date = this.date;
             let title = this.newTodo && this.newTodo.trim();
