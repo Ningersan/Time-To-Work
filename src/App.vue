@@ -63,6 +63,7 @@
             this.$nextTick(() => {
                 this.loaded = true;
             });
+
             bus.$on("btnBack", () => {
                 this.isActive = false;
             });
@@ -70,6 +71,7 @@
         watch: {
             '$route'(to, from) {
                 let action = this.$route.params.id;
+
                 if (this.$route.name === "todoList") {
                     this.$store.commit("setVisibility", action);
                 } else {
@@ -81,6 +83,7 @@
             sendMsg(show, back) {
                 bus.$emit("closeNav");
                 bus.$emit("startUp", this.isActive);
+                bus.$emit("isTyping", this.isActive);
                 bus.$emit("backToIndex", !this.isActive);
             },
             redirToHome() {

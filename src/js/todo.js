@@ -24,6 +24,10 @@ export default {
             // refresh scroll
             this.refreshScroll();
         });
+
+        bus.$on("addTodo", () => {
+            this.addTodo();
+        });
     },
 
     watch: {

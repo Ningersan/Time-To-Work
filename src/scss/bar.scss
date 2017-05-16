@@ -27,8 +27,9 @@
         line-height: 2.8em;
         color: #fefefe;
     }
-    .more {
+    .more, .add {
         @include top-button(right);
         margin-right: .1em;
+        font-size: 16px;
     }
 }
