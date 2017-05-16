@@ -53,7 +53,7 @@
                     <router-link to="/">x</router-link>
                 </div>
             </div>
-            <p><b>Time To Work</b> is a time-based Todo-list Web App<br><b>enjoy</b> your time!</p>
+            <p><b>Time To Work</b> is a time-based Todo-list Web App<br><b>enjoy</b> your time!<br><br>ps:click date to chose one, the default is today.</p>
             <p class="btn-sheet">
                 <span>@2017</span>
                 <a><strong>Ningersan</strong></a>
