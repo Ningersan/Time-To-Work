@@ -1,4 +1,5 @@
 @import "./scss/mixins.scss";
+// @import "../icons/scss/fontello.scss";
 
 $color-theme: #42b983;
 
@@ -204,6 +205,7 @@ body {
         box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
     }
     i {
+        font-size: 1.23em;
         line-height: 2.87em;
         color: #fff;
     }

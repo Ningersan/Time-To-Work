@@ -28,7 +28,7 @@
 
         <!-- btn-add -->
         <div class="btn-add" :class="{ 'active': isActive }" v-on:click="redirToHome(), isActive = !isActive, sendMsg(isActive)">
-            <i class="fa fa-plus fa-lg"></i>
+            <i class="icon-plus"></i>
         </div>
 
         <!--Todo App-->

@@ -1,9 +1,9 @@
 <template>
     <header class="app-bar">
         <div class="app-bar-wrapper">
-            <button class="menu fa fa-lg" @click="sendMsg(show = !show)" :class="[isBars ? barsClass : arrowClass]"></button>
+            <button @click="sendMsg(show = !show)" :class="[isBars ? barsClass : arrowClass]"></button>
             <h1>{{ message }}</h1>
-            <button class="more" v-show="!isAdd" @click="redirToAbout"><i class="fa fa-info-circle fa-lg"></i></button>
+            <button class="more" v-show="!isAdd" @click="redirToAbout"><i class="icon-info-circled"></i></button>
             <button class="add" v-show="isAdd" @click="addTodo">添加</button>
         </div>
     </header>
@@ -19,8 +19,8 @@
                 show: false,
                 isBars: true,
                 isAdd: false,
-                barsClass: "fa-bars",
-                arrowClass: "fa-arrow-left"
+                barsClass: "menu icon-menu",
+                arrowClass: "arrow icon-left-big"
             }
         },
 
@@ -37,10 +37,11 @@
         methods: {
             sendMsg (show) {
                 if (this.isBars) {
-                    bus.$emit("toggleNav")
+                    bus.$emit("toggleNav");
                 } else {
                     this.show = !this.show;
                     this.isBars = !this.isBars;
+                    this.isAdd = !this.isAdd;
 
                     bus.$emit("startUp", false);
                     bus.$emit("btnBack");
